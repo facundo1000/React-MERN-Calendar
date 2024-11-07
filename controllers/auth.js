@@ -111,9 +111,19 @@ const revalidarToken = async (req, res) => {
     });
 };
 
+const getUsers = async (req, res) => {
+
+    const users = await User.find();
+
+    res.json({
+        ok: true,
+        users: users
+    });
+};
 
 module.exports = {
     crearUsuario,
     loginUsuario,
-    revalidarToken
+    revalidarToken,
+    getUsers
 };
