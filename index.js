@@ -5,6 +5,8 @@ const cors = require('cors');
 
 const app = express();
 
+//TODO: ADD SWAGGER
+
 //Base de datos
 dbConnection();
 
