@@ -1,5 +1,6 @@
 const Event = require("../models/Event");
 
+//find all events
 const getEventos = async (req, res) => {
 
     const eventos = await Event.find().populate('user', 'name');
@@ -10,7 +11,18 @@ const getEventos = async (req, res) => {
     });
 };
 
+//find events by active status
+const getActiveEventos = async (req, res) => {
 
+    const eventos = await Event.find({ active: true }).populate('user', 'name');
+
+    res.status(200).json({
+        ok: true,
+        eventos: eventos,
+    });
+};
+
+// Create a new event
 const crearEvento = async (req, res) => {
 
     const evento = new Event(req.body);
@@ -33,7 +45,7 @@ const crearEvento = async (req, res) => {
 
     }
 };
-
+// Update an event by id
 const actualizarEvento = async (req, res) => {
 
     const { id } = req.params;
@@ -80,6 +92,7 @@ const actualizarEvento = async (req, res) => {
     }
 };
 
+// Delete an event by id - soft delete
 const eliminarEvento = async (req, res) => {
     const { id } = req.params;
 
@@ -134,4 +147,5 @@ module.exports = {
     crearEvento,
     actualizarEvento,
     eliminarEvento,
+    getActiveEventos,
 };

@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { getEventos, crearEvento, actualizarEvento, eliminarEvento } = require("../controllers/events");
+const { getEventos, crearEvento, actualizarEvento, eliminarEvento, getActiveEventos } = require("../controllers/events");
 const { validarJwt } = require("../middlewares/validarJwt");
 const { check } = require("express-validator");
 const { fieldValidator } = require("../middlewares/fieldValidator");
@@ -9,7 +9,8 @@ const router = Router();
 
 router.use(validarJwt);
 
-router.get("/", getEventos);
+router.get("/", getActiveEventos);
+router.get("/all", getEventos);
 
 
 router.post("/", [
